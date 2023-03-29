@@ -2,7 +2,9 @@ package com.testtask.hiddenghosts.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+val GameBackground = Color(0xFF025968)
+val GameDefault = Color(0xFF78E2F3)
+val GameCorrect = Color(0xFF67E65C)
+val GameWrong = Color(0xFFFD7777)
+val ContentBackground = Color(0xFFFFFFFF)
+val ContentBackgroundInverted = Color(0x33FFFFFF)
