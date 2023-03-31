@@ -1,5 +1,8 @@
 package com.testtask.hiddenghosts.features.game
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -70,7 +73,11 @@ fun GameScreen(
             }
         )
 
-        if (gameState.isGameEnd) {
+        AnimatedVisibility(
+            visible = gameState.isGameEnd,
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
             GameEnded(
                 level = level,
                 score = gameState.score,
@@ -148,7 +155,11 @@ fun GridCellItem(
                 onClick.invoke()
             }
     ) {
-        if (cell.isGhostVisible) {
+        AnimatedVisibility(
+            visible = cell.isGhostVisible,
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()

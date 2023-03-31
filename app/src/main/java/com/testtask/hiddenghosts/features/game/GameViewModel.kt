@@ -22,6 +22,7 @@ class GameViewModel : ViewModel() {
     val uiState: StateFlow<GameState> = _uiState.asStateFlow()
 
     private var cellClicksCounter = 0
+    private var isGameStarted = false
 
     fun resetGame(level: Level) {
         cellClicksCounter = 0
@@ -36,14 +37,16 @@ class GameViewModel : ViewModel() {
         _uiState.value = gameState
 
         viewModelScope.launch {
+            delay(GameConfig.onGameStartBoardPreviewMillis)
             previewGhostPositions()
             delay(GameConfig.ghostsVisibilityTimeoutMillis)
             hideGhostPositions()
+            isGameStarted = true
         }
     }
 
     fun onCellClick(cell: GameCellState) {
-        if (cell.isGhostVisible)
+        if (!isGameStarted || cell.isGhostVisible)
             return
 
         cellClicksCounter++
@@ -64,6 +67,7 @@ class GameViewModel : ViewModel() {
 
     private fun updateGameEndedState() {
         if (uiState.value.level.ghostsCount == cellClicksCounter) {
+            isGameStarted = false
 
             previewGhostPositions()
             _uiState.value = _uiState.value.copy(isGameEnd = true)
@@ -139,7 +143,7 @@ class GameViewModel : ViewModel() {
                     index = index,
                     cellColor = cellColor,
                     hasGhost = hasGhost,
-                    isGhostVisible = true,
+                    isGhostVisible = false,
                     ghostDrawableRes = ghostDrawableRes,
                 )
             )
