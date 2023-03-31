@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import com.testtask.hiddenghosts.core.ui.theme.*
 
-
 @Composable
 fun HGButtonMain(
     text: String,

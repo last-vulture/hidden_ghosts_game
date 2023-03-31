@@ -6,7 +6,6 @@ import androidx.compose.ui.Modifier
 import com.testtask.hiddenghosts.core.ui.theme.ContentDefault
 import com.testtask.hiddenghosts.core.ui.theme.Typography
 
-
 @Composable
 fun HGTextMain(
     text: String,
