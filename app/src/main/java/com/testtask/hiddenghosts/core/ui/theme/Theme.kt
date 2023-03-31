@@ -1,12 +1,12 @@
-package com.testtask.hiddenghosts.ui.theme
+package com.testtask.hiddenghosts.core.ui.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.runtime.Composable
 
 private val GameColorPalette = darkColors(
-    primary = GameBackground,
-    secondary = ContentBackground
+    primary = GameDefault,
+    secondary = ContentDefault
 )
 
 @Composable

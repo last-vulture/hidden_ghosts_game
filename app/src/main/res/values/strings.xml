@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Hidden Ghosts</string>
+
+    <string name="content_description_app_background">Game background</string>
+    <string name="content_description_ghost_cell">Ghost cell</string>
+
+    <string name="action_restart">Restart</string>
+    <string name="action_start_game">Start game</string>
+    <string name="action_next_level">Next level</string>
+
+    <string name="title_score">Score</string>
+    <string name="content_description_game_logo">Game logo</string>
+    <string name="content_description_end_game_result">End game result</string>
+
 </resources>
