@@ -41,10 +41,24 @@ object GameConfig {
         R.drawable.ic_ghost_5,
     )
 
-    fun getNextLevel(level: Level) : Level {
+    fun getNextLevel(level: Level, score: Int): Level {
+        val nextLevel = if (isLevelPassed(level, score)) {
+            getNextLevelOrFirst(level)
+        } else {
+            level
+        }
+        return nextLevel
+    }
+
+    private fun getNextLevelOrFirst(level: Level): Level {
         val nextLevelIndex = levels.indexOf(level) + 1
         return levels.getOrElse(nextLevelIndex) {
             levels.first()
         }
+    }
+
+    fun isLevelPassed(level: Level, score: Int): Boolean {
+        val requiredScore = level.ghostsCount * pointsPerGhost
+        return requiredScore == score
     }
 }

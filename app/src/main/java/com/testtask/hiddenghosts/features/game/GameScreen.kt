@@ -100,10 +100,7 @@ fun GameEnded(level: Level, score: Int, navigator: DestinationsNavigator) {
         }
     }
 
-    val requiredScore = level.ghostsCount * GameConfig.pointsPerGhost
-    val isLevelPassed = requiredScore == score
-
-    val gameEndDrawableRes = if (isLevelPassed) {
+    val gameEndDrawableRes = if (GameConfig.isLevelPassed(level, score)) {
         R.drawable.ic_level_passed
     } else {
         R.drawable.ic_level_failed

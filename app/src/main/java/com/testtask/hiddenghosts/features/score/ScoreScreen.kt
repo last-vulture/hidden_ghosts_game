@@ -10,8 +10,8 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.testtask.hiddenghosts.R
 import com.testtask.hiddenghosts.core.data.GameConfig
 import com.testtask.hiddenghosts.core.data.Level
-import com.testtask.hiddenghosts.core.ui.design_system.HGCenterBox
 import com.testtask.hiddenghosts.core.ui.design_system.HGButtonMain
+import com.testtask.hiddenghosts.core.ui.design_system.HGCenterBox
 import com.testtask.hiddenghosts.core.ui.design_system.HGTextMain
 import com.testtask.hiddenghosts.core.ui.design_system.HGTextSecondary
 import com.testtask.hiddenghosts.features.destinations.GameMenuScreenDestination
@@ -24,15 +24,6 @@ fun ScoreScreen(
     level: Level,
     navigator: DestinationsNavigator
 ) {
-    val requiredScore = level.ghostsCount * GameConfig.pointsPerGhost
-    val isLevelPassed = requiredScore == score
-
-    val nextLevel = if (isLevelPassed) {
-        GameConfig.getNextLevel(level)
-    } else {
-        level
-    }
-
     HGCenterBox {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             HGTextMain(text = "$score")
@@ -43,7 +34,11 @@ fun ScoreScreen(
             modifier = Modifier.align(Alignment.BottomCenter),
             text = stringResource(id = R.string.action_next_level)
         ) {
-            navigator.navigate(GameScreenDestination(level = nextLevel)) {
+            navigator.navigate(
+                GameScreenDestination(
+                    level = GameConfig.getNextLevel(level, score)
+                )
+            ) {
                 popUpTo(GameMenuScreenDestination.route)
             }
         }
