@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import com.testtask.hiddenghosts.core.ui.theme.screenPadding
 
 @Composable
-fun HGBox(
+fun HGCenterBox(
     modifier: Modifier = Modifier,
     content: @Composable BoxScope.() -> Unit
 ) {

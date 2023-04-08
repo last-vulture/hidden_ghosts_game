@@ -6,7 +6,7 @@ object GameConfig {
     const val splashScreenTimeoutMillis = 1000L
     const val ghostsVisibilityTimeoutMillis = 2500L
     const val onGameEndBoardPreviewMillis = 1500L
-    const val onGameStartBoardPreviewMillis = 1000L
+    const val onGameStartBoardPreviewMillis = 500L
 
     const val pointsPerGhost = 5
 

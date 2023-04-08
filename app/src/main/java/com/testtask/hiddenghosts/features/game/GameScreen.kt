@@ -1,6 +1,7 @@
 package com.testtask.hiddenghosts.features.game
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
@@ -10,10 +11,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -24,7 +22,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.testtask.hiddenghosts.R
 import com.testtask.hiddenghosts.core.data.GameConfig
 import com.testtask.hiddenghosts.core.data.Level
-import com.testtask.hiddenghosts.core.ui.design_system.HGBox
+import com.testtask.hiddenghosts.core.ui.design_system.HGCenterBox
 import com.testtask.hiddenghosts.core.ui.design_system.HGButtonSecondary
 import com.testtask.hiddenghosts.core.ui.design_system.HGTextSecondary
 import com.testtask.hiddenghosts.core.ui.theme.CellBackground
@@ -48,7 +46,7 @@ fun GameScreen(
         gameViewModel.resetGame(level)
     }
 
-    HGBox {
+    HGCenterBox {
         Column(
             modifier = Modifier.align(Alignment.TopCenter),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -131,12 +129,21 @@ fun GameBoardGrid(
         horizontalArrangement = Arrangement.spacedBy(gameBoardCellsPadding)
     ) {
         items(items = gameCellStates) { cell ->
-            GridCellItem(
-                cell = cell,
-                onClick = {
-                    onCellClick.invoke(cell)
+            val state = remember {
+                MutableTransitionState(false).apply {
+                    targetState = true
                 }
-            )
+            }
+            AnimatedVisibility(
+                visibleState = state
+            ) {
+                GridCellItem(
+                    cell = cell,
+                    onClick = {
+                        onCellClick.invoke(cell)
+                    }
+                )
+            }
         }
     }
 }
@@ -144,11 +151,10 @@ fun GameBoardGrid(
 @Composable
 fun GridCellItem(
     cell: GameCellState,
-    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     Box(
-        modifier = modifier
+        modifier = Modifier
             .background(CellBackground)
             .aspectRatio(1f)
             .clickable {

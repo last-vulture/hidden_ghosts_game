@@ -11,6 +11,7 @@ import com.testtask.hiddenghosts.core.ui.theme.GameCellDefault
 import com.testtask.hiddenghosts.core.ui.theme.GameCellWrong
 import com.testtask.hiddenghosts.features.game.state.GameCellState
 import com.testtask.hiddenghosts.features.game.state.GameState
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,9 +25,23 @@ class GameViewModel : ViewModel() {
     private var cellClicksCounter = 0
     private var isGameStarted = false
 
-    fun resetGame(level: Level) {
-        cellClicksCounter = 0
+    private var boardPreviewJob: Job? = null
 
+    private var isFirstLevelStart = true
+
+    fun resetGame(level: Level) {
+        isGameStarted = false
+        cellClicksCounter = 0
+        boardPreviewJob?.cancel()
+
+        if(isFirstLevelStart) {
+            updateGameState(level)
+            isFirstLevelStart = false
+        }
+
+        previewBoard(level)
+    }
+    private fun updateGameState(level: Level) {
         val gameState = GameState(
             score = 0,
             level = level,
@@ -35,9 +50,12 @@ class GameViewModel : ViewModel() {
         )
 
         _uiState.value = gameState
-
-        viewModelScope.launch {
+    }
+    private fun previewBoard(level: Level) {
+        boardPreviewJob = viewModelScope.launch {
+            hideGhostPositions()
             delay(GameConfig.onGameStartBoardPreviewMillis)
+            updateGameState(level)
             previewGhostPositions()
             delay(GameConfig.ghostsVisibilityTimeoutMillis)
             hideGhostPositions()
@@ -161,4 +179,8 @@ class GameViewModel : ViewModel() {
         return positions
     }
 
+    override fun onCleared() {
+        boardPreviewJob?.cancel()
+        super.onCleared()
+    }
 }

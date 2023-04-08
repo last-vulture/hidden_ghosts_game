@@ -10,7 +10,7 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.testtask.hiddenghosts.R
 import com.testtask.hiddenghosts.core.data.GameConfig
-import com.testtask.hiddenghosts.core.ui.design_system.HGBox
+import com.testtask.hiddenghosts.core.ui.design_system.HGCenterBox
 import com.testtask.hiddenghosts.features.destinations.GameMenuScreenDestination
 import com.testtask.hiddenghosts.features.destinations.SplashScreenDestination
 import kotlinx.coroutines.delay
@@ -32,7 +32,7 @@ fun SplashScreen(
         }
     }
 
-    HGBox {
+    HGCenterBox {
         Image(
             painter = painterResource(id = R.drawable.ic_game_icon),
             contentDescription = stringResource(R.string.content_description_game_logo)

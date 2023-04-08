@@ -10,7 +10,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.testtask.hiddenghosts.R
 import com.testtask.hiddenghosts.core.data.GameConfig
 import com.testtask.hiddenghosts.core.data.Level
-import com.testtask.hiddenghosts.core.ui.design_system.HGBox
+import com.testtask.hiddenghosts.core.ui.design_system.HGCenterBox
 import com.testtask.hiddenghosts.core.ui.design_system.HGButtonMain
 import com.testtask.hiddenghosts.core.ui.design_system.HGTextMain
 import com.testtask.hiddenghosts.core.ui.design_system.HGTextSecondary
@@ -33,7 +33,7 @@ fun ScoreScreen(
         level
     }
 
-    HGBox {
+    HGCenterBox {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             HGTextMain(text = "$score")
             HGTextSecondary(text = stringResource(id = R.string.title_score))

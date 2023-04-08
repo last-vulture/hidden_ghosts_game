@@ -6,7 +6,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.testtask.hiddenghosts.R
 import com.testtask.hiddenghosts.core.data.GameConfig
-import com.testtask.hiddenghosts.core.ui.design_system.HGBox
+import com.testtask.hiddenghosts.core.ui.design_system.HGCenterBox
 import com.testtask.hiddenghosts.core.ui.design_system.HGButtonMain
 import com.testtask.hiddenghosts.features.destinations.GameScreenDestination
 
@@ -15,7 +15,7 @@ import com.testtask.hiddenghosts.features.destinations.GameScreenDestination
 fun GameMenuScreen(
     navigator: DestinationsNavigator
 ) {
-    HGBox {
+    HGCenterBox {
         HGButtonMain(text = stringResource(id = R.string.action_start_game)) {
             navigator.navigate(GameScreenDestination(level = GameConfig.levels.first()))
         }
